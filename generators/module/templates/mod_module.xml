@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="module" client="site" method="upgrade">
+    <name>mod_<%= lExtName %></name>
+    <author><%= authorName %></author>
+	<creationDate><%= creationDate %></creationDate>
+	<copyright>(C) <%= year %> <%= authorName %></copyright>
+	<license><%= license %>; see LICENSE.txt</license>
+    <authorEmail><%= authorEmail %></authorEmail>
+    <version>1.0.0</version>
+    <description>MOD_<%= uExtName %>_XML_DESCRIPTION</description>
+    <namespace path="src"><%= vendorName %>\Module\<%= nsExtName %></namespace>
+    <files>
+        <folder module="mod_<%= lExtName %>">services</folder>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+    </files>
+    <!-- <media destination="mod_<%= lExtName %>" folder="media">
+		<folder>css</folder>
+	</media> -->
+
+    <languages>
+        <language tag="en-GB">language/en-GB/mod_<%= lExtName %>.ini</language>
+        <language tag="en-GB">language/en-GB/mod_<%= lExtName %>.sys.ini</language>
+        <language tag="es-ES">language/es-ES/mod_<%= lExtName %>.ini</language>
+        <language tag="es-ES">language/es-ES/mod_<%= lExtName %>.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="foo"
+                    type="text"
+                    label="Foo value"
+                    description=""
+                    default="Bar"
+                />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

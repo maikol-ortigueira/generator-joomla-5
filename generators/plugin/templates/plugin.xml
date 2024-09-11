@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="plugin" group="<%= lPluginGroup %>" method="upgrade">
+	<name>plg_<%= lPluginGroup %>_<%= lExtName %></name>
+    <author><%= authorName %></author>
+	<creationDate><%= creationDate %></creationDate>
+	<copyright>(C) <%= year %> <%= authorName %></copyright>
+	<license><%= license %>; see LICENSE.txt</license>
+	<authorEmail><%= authorEmail %></authorEmail>
+	<authorUrl><%= authorURL %></authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_<%= uPluginGroup %>_<%= uExtName %>_XML_DESCRIPTION</description>
+	<namespace path="src"><%= vendorName %>\Plugin\<%= nsPluginGroup %>\<%= nsExtName %></namespace>
+	<files>
+		<folder plugin="<%= lExtName %>">services</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/plg_<%= lPluginGroup %>_<%= lExtName %>.ini</language>
+		<language tag="en-GB">language/en-GB/plg_<%= lPluginGroup %>_<%= lExtName %>.sys.ini</language>
+		<language tag="es-ES">language/es-ES/plg_<%= lPluginGroup %>_<%= lExtName %>.ini</language>
+		<language tag="es-ES">language/es-ES/plg_<%= lPluginGroup %>_<%= lExtName %>.sys.ini</language>
+	</languages>
+</extension>
