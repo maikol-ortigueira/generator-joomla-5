@@ -1,52 +1,51 @@
-'use strict';
-const _ = require('lodash');
-const Generator = require('yeoman-generator');
+"use strict";
+const _ = require("lodash");
+const Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
-
   constructor(args, opts) {
     super(args, opts);
 
-    this.option('props', {
+    this.option("props", {
       type: Object,
       required: false,
-      desc: 'Extension properties'
+      desc: "Extension properties"
     });
   }
 
   initializing() {
-    // Definir las propiedades de la extensión
+    // Define the extension properties
     this.props = this.options.props;
   }
 
   prompting() {
     const prompts = [
       {
-        type: 'list',
-        name: 'moduleClient',
-        message: 'What is the client of your module?',
+        type: "list",
+        name: "moduleClient",
+        message: "What is the client of your module?",
         choices: [
           {
-            name: 'Site',
-            value: 'site'
+            name: "Site",
+            value: "site"
           },
           {
-            name: 'Administrator',
-            value: 'admin'
+            name: "Administrator",
+            value: "admin"
           }
-        ],
+        ]
       },
       {
-        type: 'input',
-        name: 'namespace_vendor',
+        type: "input",
+        name: "namespace_vendor",
         message: `What do you call the first segment of a namespace, like Acme in Acme/Module/${this.props.namespaceExtName}?`,
-        default: 'Acme'
+        default: "Acme"
       }
     ];
 
     return this.prompt(prompts).then(props => {
       props.namespace_vendor = _.startCase(props.namespace_vendor);
-      // Añadir las propiedades de la extensión
+      // Assign the extension properties
       this.props = Object.assign(this.props, props);
     });
   }
@@ -56,21 +55,20 @@ module.exports = class extends Generator {
     this._destPath();
 
     // Add License
-    this.composeWith(require.resolve('generator-license/app'), {
+    this.composeWith(require.resolve("generator-license/app"), {
       name: this.props.extAuthor,
       email: this.props.extAuthorEmail,
       website: this.props.extAuthorURL,
       license: this.props.license,
       output: `${this.props.destPath}/LICENSE`
     });
-
   }
 
   writing() {
-    // Definir la ruta del directorio de destino
+    // define the destination path
     const destinationPath = this.destinationPath(this.props.destPath);
 
-    // Copiar archivos de plantilla al directorio de destino
+    // copy module files to the destination path
     this._copyModuleFiles(destinationPath);
   }
 
@@ -80,44 +78,31 @@ module.exports = class extends Generator {
     let module_name = `mod_${this.props.extName}`;
     let from_to = [
       {
-        from: 'services/**',
-        to: 'services/'
+        from: "services/**",
+        to: "services/"
       },
       {
-        from: 'src/Dispatcher/**',
-        to: 'src/Dispatcher/'
+        from: "src/Dispatcher/**",
+        to: "src/Dispatcher/"
       },
       {
-        from: 'tmpl/**',
-        to: 'tmpl/'
+        from: "tmpl/**",
+        to: "tmpl/"
       },
       {
-          from: 'language/en-GB/extension.ini',
-          to: `language/en-GB/${module_name}.ini`
-      },
-      {
-          from: 'language/en-GB/extension.sys.ini',
-          to: `language/en-GB/${module_name}.sys.ini`
-      },
-      {
-          from: 'language/es-ES/extension.ini',
-          to: `language/es-ES/${module_name}.ini`
-      },
-      {
-          from: 'language/es-ES/extension.sys.ini',
-          to: `language/es-ES/${module_name}.sys.ini`
-      },
-      {
-        from: 'src/Helper/ModuleHelper.php',
+        from: "src/Helper/ModuleHelper.php",
         to: `src/Helper/${this.props.namespaceExtName}Helper.php`
       },
       {
-        from: 'mod_module.xml',
+        from: "mod_module.xml",
         to: `${this.props.extName}.xml`
       }
     ];
 
-    from_to.forEach((item) => {
+    // merge the language files
+    from_to = from_to.concat(this._mapLanguageFiles("extension", module_name));
+
+    from_to.forEach(item => {
       this._copyFiles(
         this.templatePath(item.from),
         this.destinationPath(`${destinationPath}/${item.to}`)
@@ -125,13 +110,40 @@ module.exports = class extends Generator {
     });
   }
 
+  /**
+   * Map the language files
+   * @param {string} initialName - The initial name of the language files
+   * @param {string} finalName - The final name of the language files
+   * @param {Array<string>} languages - The languages to map
+   * @returns {Array<object>} The mapped language files
+   */
+  _mapLanguageFiles(initialName, finalName, languages = []) {
+    // if language array is empty, set default languages
+    if (languages.length === 0) {
+      languages = ["en-GB", "es-ES"];
+    }
+
+    languages = languages.map(language => {
+      // returns an array with the language files
+      return [
+        {
+          from: `language/${language}/${initialName}.ini`,
+          to: `language/${language}/${finalName}.ini`
+        },
+        {
+          from: `language/${language}/${initialName}.sys.ini`,
+          to: `language/${language}/${finalName}.sys.ini`
+        }
+      ];
+    });
+
+    // flatten the array
+    return [].concat.apply([], languages);
+  }
+
   _copyFiles(templatePath, destinationPath) {
-    // Copiar archivos de plantilla al directorio de destino
-    this.fs.copyTpl(
-      templatePath,
-      destinationPath,
-      this._patterns()
-    );
+    // copy the files
+    this.fs.copyTpl(templatePath, destinationPath, this._patterns());
   }
 
   /**
@@ -143,8 +155,7 @@ module.exports = class extends Generator {
 
   /**
    * The patterns to replace in the templates
-   *
-   * @returns {Object} The patterns to replace in the templates
+   * @returns {object} The patterns to replace in the templates
    */
   _patterns() {
     return {
@@ -162,6 +173,6 @@ module.exports = class extends Generator {
       lModuleClient: this.props.moduleClient,
       uModuleClient: this.props.moduleClient.toUpperCase(),
       nsModuleClient: _.startCase(this.props.moduleClient)
-    }
+    };
   }
 };
