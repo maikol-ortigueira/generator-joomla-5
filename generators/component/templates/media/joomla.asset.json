@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.joomla.org/schemas/json-schema/web_assets.json",
+  "name": "com_<%= lExtName %>",
+  "version": "5.0.0",
+  "description": "<%= description %>",
+  "license": "<%= license %>",
+  "assets": [
+    {
+      "name": "com_<%= lExtName %>.<%= lExtName %>",
+      "type": "script",
+      "uri": "com_<%= lExtName %><%= lExtName %>.js"
+    },
+    {
+      "name": "com_<%= lExtName %>.<%= lExtName %>",
+      "type": "style",
+      "uri": "com_<%= lExtName %><%= lExtName %>.css"
+    }
+  ]
+}

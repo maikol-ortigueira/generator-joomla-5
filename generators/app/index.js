@@ -42,7 +42,7 @@ module.exports = class extends Generator {
             value: "plugin"
           }
         ],
-        default: "module"
+        default: "component"
       },
       {
         type: "input",
@@ -101,7 +101,15 @@ module.exports = class extends Generator {
 
     // Compose with the selected extension type
     this.composeWith(require.resolve(`../${this.props.extType}`), {
-      props: this.props
+      extName: this.props.extName,
+      description: this.props.extDescription,
+      author: this.props.extAuthor,
+      authorEmail: this.props.extAuthorEmail,
+      authorURL: this.props.extAuthorURL,
+      nsExtName: this.props.namespaceExtName,
+      license: this.props.license,
+      currentDate: this.props.currentDate,
+      currentYear: this.props.currentYear
     });
   }
 

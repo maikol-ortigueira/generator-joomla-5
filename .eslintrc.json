@@ -2,10 +2,9 @@
   "extends": [
     "eslint:recommended",
     "plugin:prettier/recommended",
-    "plugin:jest/recommended",
     "plugin:jsdoc/recommended"
   ],
-  "plugins": ["prettier", "jest", "jsdoc"],
+  "plugins": ["prettier", "jsdoc"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"

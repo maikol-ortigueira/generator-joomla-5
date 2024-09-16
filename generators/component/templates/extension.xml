@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" method="upgrade">
+    <name>com_<%= lExtName %></name>
+    <author><%= authorName %></author>
+	<creationDate><%= creationDate %></creationDate>
+	<copyright>(C) <%= year %> <%= authorName %></copyright>
+	<license><%= license %>; see LICENSE.txt</license>
+    <authorEmail><%= authorEmail %></authorEmail>
+    <authorUrl><%= authorURL %></authorUrl>
+    <version>1.0.0</version>
+    <description>COM_<%= uExtName %>_XML_DESCRIPTION</description>
+
+    <scriptfile>script.php</scriptfile>
+
+    <namespace path="src"><%= vendorName %>\Component\<%= nsExtName %></namespace>
+
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+    <update> <!-- Runs on update -->
+        <schemas>
+            <schemapath type="mysql">sql/updates/mysql</schemapath>
+        </schemas>
+    </update>
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+
+    <files folder="site">
+		<folder>src</folder>
+		<folder>tmpl</folder>
+    </files>
+    <!-- <api>
+        <files folder="api">
+            <folder>src</folder>
+        </files>
+    </api> -->
+    <media destination="com_<%= lExtName %>" folder="media">
+        <folder>js</folder>
+        <folder>css</folder>
+        <filename>joomla.asset.json</filename>
+    </media>
+    <languages folder="site/language">
+			<language tag="en-GB">en-GB/com_<%= lExtName %>.ini</language>
+			<language tag="es-ES">es-ES/com_<%= lExtName %>.ini</language>
+    </languages>
+    <administration>
+        <files folder="admin">
+            <filename>access.xml</filename>
+            <filename>config.xml</filename>
+            <folder>forms</folder>
+            <folder>helpers</folder>
+            <folder>language</folder>
+            <folder>layouts</folder>
+            <folder>services</folder>
+            <folder>sql</folder>
+            <folder>src</folder>
+            <folder>tmpl</folder>
+        </files>
+        <languages folder="admin">
+ 			<language tag="en-GB">language/en-GB/com_<%= lExtName %>.ini</language>
+			<language tag="en-GB">language/en-GB/com_<%= lExtName %>.sys.ini</language>
+			<language tag="es-ES">language/es-ES/com_<%= lExtName %>.ini</language>
+			<language tag="es-ES">language/es-ES/com_<%= lExtName %>.sys.ini</language>
+        </languages>
+    </administration>
+</extension>

@@ -3,19 +3,62 @@ const _ = require("lodash");
 const Generator = require("yeoman-generator");
 
 module.exports = class extends Generator {
-  constructor(args, opts) {
-    super(args, opts);
+  constructor(args, options) {
+    super(args, options);
 
-    this.option("props", {
-      type: Object,
-      required: false,
-      desc: "Extension properties"
+    this.option("extName", {
+      type: String,
+      required: true,
+      desc: "Extension name"
     });
-  }
 
-  initializing() {
-    // Define the extension properties
-    this.props = this.options.props;
+    this.option("description", {
+      type: String,
+      required: false,
+      desc: "Extension description"
+    });
+
+    this.option("author", {
+      type: String,
+      required: false,
+      desc: "Extension author"
+    });
+
+    this.option("authorEmail", {
+      type: String,
+      required: false,
+      desc: "Extension author email"
+    });
+
+    this.option("authorURL", {
+      type: String,
+      required: false,
+      desc: "Extension author URL"
+    });
+
+    this.option("license", {
+      type: String,
+      required: false,
+      desc: "Extension license"
+    });
+
+    this.option("nsExtName", {
+      type: String,
+      required: false,
+      desc: "Extension namespace name"
+    });
+
+    this.option("currentDate", {
+      type: String,
+      required: false,
+      desc: "Current date"
+    });
+
+    this.option("currentYear", {
+      type: String,
+      required: false,
+      desc: "Current year"
+    });
   }
 
   prompting() {
@@ -38,15 +81,17 @@ module.exports = class extends Generator {
       {
         type: "input",
         name: "namespace_vendor",
-        message: `What do you call the first segment of a namespace, like Acme in Acme/Module/${this.props.namespaceExtName}?`,
+        message: `What do you call the first segment of a namespace, like Acme in Acme/Module/${this.options.nsExtName}?`,
         default: "Acme"
       }
     ];
 
     return this.prompt(prompts).then(props => {
-      props.namespace_vendor = _.startCase(props.namespace_vendor);
+      // nsVendorName
+      let nsVendorName = props.namespace_vendor.trim().toLowerCase();
+      props.namespace_vendor = _.startCase(nsVendorName).replace(/ /g, "");
       // Assign the extension properties
-      this.props = Object.assign(this.props, props);
+      this.props = props;
     });
   }
 
@@ -56,10 +101,10 @@ module.exports = class extends Generator {
 
     // Add License
     this.composeWith(require.resolve("generator-license/app"), {
-      name: this.props.extAuthor,
-      email: this.props.extAuthorEmail,
-      website: this.props.extAuthorURL,
-      license: this.props.license,
+      name: this.options.author,
+      email: this.options.authorEmail,
+      website: this.options.authorURL,
+      license: this.options.license,
       output: `${this.props.destPath}/LICENSE`
     });
   }
@@ -75,7 +120,7 @@ module.exports = class extends Generator {
   // Private methods
 
   _copyModuleFiles(destinationPath) {
-    let module_name = `mod_${this.props.extName}`;
+    let module_name = `mod_${this.options.extName}`;
     let from_to = [
       {
         from: "services/**",
@@ -91,11 +136,11 @@ module.exports = class extends Generator {
       },
       {
         from: "src/Helper/ModuleHelper.php",
-        to: `src/Helper/${this.props.namespaceExtName}Helper.php`
+        to: `src/Helper/${this.options.nsExtName}Helper.php`
       },
       {
         from: "mod_module.xml",
-        to: `${this.props.extName}.xml`
+        to: `${this.options.extName}.xml`
       }
     ];
 
@@ -150,7 +195,7 @@ module.exports = class extends Generator {
    * Define the destination path
    */
   _destPath() {
-    this.props.destPath = `joomla_extensions/${this.props.extType}s/${this.props.moduleClient}/${this.props.extName}`;
+    this.props.destPath = `joomla_extensions/modules/${this.props.moduleClient}/${this.options.extName}`;
   }
 
   /**
@@ -159,17 +204,17 @@ module.exports = class extends Generator {
    */
   _patterns() {
     return {
-      lExtName: this.props.extName,
-      uExtName: this.props.extName.toUpperCase(),
-      nsExtName: this.props.namespaceExtName,
-      authorName: this.props.extAuthor,
-      authorEmail: this.props.extAuthorEmail,
-      authorURL: this.props.extAuthorURL,
-      description: this.props.extDescription,
+      lExtName: this.options.extName,
+      uExtName: this.options.extName.toUpperCase(),
+      nsExtName: this.options.nsExtName,
+      authorName: this.options.author,
+      authorEmail: this.options.authorEmail,
+      authorURL: this.options.authorURL,
+      description: this.options.description,
       vendorName: this.props.namespace_vendor,
-      creationDate: this.props.currentDate,
-      year: this.props.currentYear,
-      license: this.props.license,
+      creationDate: this.options.currentDate,
+      year: this.options.currentYear,
+      license: this.options.license,
       lModuleClient: this.props.moduleClient,
       uModuleClient: this.props.moduleClient.toUpperCase(),
       nsModuleClient: _.startCase(this.props.moduleClient)

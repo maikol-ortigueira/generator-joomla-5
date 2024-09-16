@@ -6,6 +6,7 @@
 	<copyright>(C) <%= year %> <%= authorName %></copyright>
 	<license><%= license %>; see LICENSE.txt</license>
     <authorEmail><%= authorEmail %></authorEmail>
+    <authorUrl><%= authorURL %></authorUrl>
     <version>1.0.0</version>
     <description>MOD_<%= uExtName %>_XML_DESCRIPTION</description>
     <namespace path="src"><%= vendorName %>\Module\<%= nsExtName %></namespace>

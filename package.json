@@ -25,8 +25,10 @@
     "eslint-plugin-jsdoc": "^50.2.2",
     "eslint-plugin-prettier": "^3.1.1",
     "husky": "^3.0.9",
-    "jest": "^26.1.0",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3",
     "lint-staged": "^9.4.3",
+    "pluralize": "^8.0.0",
     "prettier": "^1.19.1",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^1.7.0"
@@ -41,7 +43,10 @@
     "yosay": "^2.0.2"
   },
   "jest": {
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "templates"
+    ]
   },
   "lint-staged": {
     "*.js": [
@@ -76,7 +81,8 @@
   },
   "scripts": {
     "pretest": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "test:cov": "jest --coverage"
   },
   "repository": "maikol-ortigueira/generator-joomla-5",
   "license": "Apache-2.0"
