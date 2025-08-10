@@ -19,7 +19,7 @@ use Joomla\CMS\Form\Form;
 use Joomla\CMS\MVC\Model\AdminModel;
 
 class <%= nsItemName %>Model extends AdminModel
-{    
+{
     /**
     * The prefix to use with controller messages.
     *
@@ -43,14 +43,12 @@ class <%= nsItemName %>Model extends AdminModel
      * @param   array    $data      Data for the form. [optional]
      * @param   boolean  $loadData  True if the form is to load its own data (default case), false if not. [optional]
      *
-     * @return  Form|boolean  A Form object on success, false on failure
+     * @return  Form  A Form object on success, false on failure
      */
-    public function getForm(array $data = array(), bool $loadData = true): Form|bool
+    public function getForm($data = array(), $loadData = true): Form
     {
         $form = $this->loadForm('com_<%= lExtName %>.<%= lItemName %>', '<%= lItemName %>', array('control' => 'jform', 'load_data' => $loadData));
-        if (empty($form)) {
-            return false;
-        }
+
         return $form;
     }
 
@@ -82,7 +80,7 @@ class <%= nsItemName %>Model extends AdminModel
      *
      * @return  mixed  Object on success, false on failure.
      */
-    public function getItem(int $pk = null): mixed
+    public function getItem($pk = null): mixed
     {
         return parent::getItem($pk);
     }

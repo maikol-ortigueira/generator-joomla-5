@@ -10,7 +10,6 @@
 
 namespace <%= vendorName %>\Component\<%= nsExtName %>\Administrator\View\<%= nsItemName %>;
 
-use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\Form;
 use Joomla\CMS\Helper\ContentHelper;
@@ -74,6 +73,7 @@ class HtmlView extends BaseHtmlView
         $this->form  = $model->getForm();
         $this->item  = $model->getItem();
         $this->state = $model->getState();
+        $this->canDo = ContentHelper::getActions('com_<%= lExtName %>');
 
         // Check for errors.
         if (\count($errors = $this->get('Errors'))) {
@@ -102,9 +102,7 @@ class HtmlView extends BaseHtmlView
         $isNew      = ($this->item->id == 0);
         $checkedOut = !(\is_null($this->item->checked_out) || $this->item->checked_out == $userId);
         $toolbar    = Toolbar::getInstance();
-
-        // Since we don't track these assets at the item level, use the category id.
-        $canDo = ContentHelper::getActions('com_<%= lExtName %>', 'category', $this->item->catid);
+        $canDo = $this->canDo;
 
         ToolbarHelper::title($isNew ? Text::_('COM_<%= uExtName %>_MANAGER_<%= uItemName %>_NEW') : Text::_('COM_<%= uExtName %>_MANAGER_<%= uItemName %>_EDIT'), 'bookmark <%= lItemsName %>');
 

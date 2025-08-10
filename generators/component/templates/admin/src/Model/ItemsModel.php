@@ -10,6 +10,10 @@
 
 namespace <%= vendorName %>\Component\<%= nsExtName %>\Administrator\Model;
 
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\MVC\Model\ListModel;
+use Joomla\Database\ParameterType;
+
 // phpcs: disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
 // phpcs: enable PSR1.Files.SideEffects
@@ -19,7 +23,7 @@ namespace <%= vendorName %>\Component\<%= nsExtName %>\Administrator\Model;
  *
  * @since  1.6
  */
-class <%= uItemsName %>Model extends ListModel
+class <%= nsItemsName %>Model extends ListModel
 {
     /**
      * Constructor.
@@ -111,7 +115,7 @@ class <%= uItemsName %>Model extends ListModel
                     $db->quoteName('a.state'),
                 ]
             )
-        )
+        );
 
         $query->from($db->quoteName('#__<%= lExtName %>_<%= lItemsName %>', 'a'));
 

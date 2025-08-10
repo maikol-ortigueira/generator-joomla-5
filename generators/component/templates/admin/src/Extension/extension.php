@@ -30,7 +30,7 @@ use Psr\Container\ContainerInterface;
  *
  * @since  4.0.0
  */
-class OrtentrenamientosComponent extends MVCComponent implements
+class <%= nsExtName %>Component extends MVCComponent implements
     BootableExtensionInterface,
     RouterServiceInterface,
     CategoryServiceInterface,
@@ -48,7 +48,7 @@ class OrtentrenamientosComponent extends MVCComponent implements
      * registering HTML services.
      *
      * @param   ContainerInterface  $container  The container
-     *
+     *S
      * @return  void
      *
      * @since   4.0.0
@@ -56,5 +56,39 @@ class OrtentrenamientosComponent extends MVCComponent implements
     public function boot(ContainerInterface $container)
     {
         $this->getRegistry()->register('<%= lExtName %>administrator', new AdministratorService);
+    }
+
+    /**
+     * Validates the context of a given section
+     *
+     * @param   string  $section  The section
+     * @param   mixed   $item     The item
+     *
+     * @return  boolean
+     *
+     * @since   4.0.0
+     */
+    public function validateSection($section, $item = null)
+    {
+        if (strpos($section, 'com_<%= lExtName %>.') === 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns valid contexts
+     *
+     * @return  array
+     *
+     * @since   4.0.0
+     */
+    public function getContexts(): array
+    {
+        return [
+            'com_<%= lExtName %>.<%= lItemName %>',
+            'com_<%= lExtName %>.<%= lItemsName %>',
+        ];
     }
 }

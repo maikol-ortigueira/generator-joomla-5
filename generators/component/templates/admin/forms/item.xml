@@ -12,40 +12,40 @@
         />
 
         <field
-            name="name"
-            type="text"
-            label="COM_<%= uExtName %>_FIELD_NAME_LABEL"
-            description="COM_<%= uExtName %>_FIELD_NAME_DESC"
-            required="true"
+          name="name"
+          type="text"
+          label="COM_<%= uExtName %>_FIELD_NAME_LABEL"
+          description="COM_<%= uExtName %>_<%= uItemName %>_FIELD_NAME_DESC"
+          required="true"
         />
 
         <field
-            name="alias"
-            type="text"
-			label="JFIELD_ALIAS_LABEL"
-			description="JFIELD_ALIAS_DESC"
-			hint="JFIELD_ALIAS_PLACEHOLDER"
+          name="alias"
+          type="text"
+          label="JFIELD_ALIAS_LABEL"
+          description="JFIELD_ALIAS_DESC"
+          hint="JFIELD_ALIAS_PLACEHOLDER"
         />
 
         <field
-			name="state"
-			type="list"
-			label="JSTATUS"
-			class="form-select-color-state"
-			default="1"
-			validate="options"
-        >
-            <option value="1">JPUBLISHED</option>
-            <option value="0">JUNPUBLISHED</option>
-            <option value="2">JARCHIVED</option>
-            <option value="-2">JTRASHED</option>
+          name="state"
+          type="list"
+          label="JSTATUS"
+          class="form-select-color-state"
+          default="1"
+          validate="options"
+          >
+          <option value="1">JPUBLISHED</option>
+          <option value="0">JUNPUBLISHED</option>
+          <option value="2">JARCHIVED</option>
+          <option value="-2">JTRASHED</option>
         </field>
 
         <field
-			name="ordering"
-			type="ordering"
-			label="JFIELD_ORDERING_LABEL"
-			table="#__<%= lExtName %>_<%= lItemsName %>"
+          name="ordering"
+          type="ordering"
+          label="JFIELD_ORDERING_LABEL"
+          table="#__<%= lExtName %>_<%= lItemsName %>"
 		/>
     </fieldset>
 

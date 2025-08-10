@@ -49,13 +49,22 @@
 			<language tag="es-ES">es-ES/com_<%= lExtName %>.ini</language>
     </languages>
     <administration>
+      <menu img="class:bookmark">com_<%= lExtName %></menu>
+        <submenu>
+            <menu
+                link="option=com_<%= lExtName %>"
+                view="<%= lItemsName %>"
+                img="class:<%= lItemsName %>"
+                alt="<%= nsExtName %>/<%= nsItemsName %>"
+                >
+                com_<%= lExtName %>_<%= lItemsName %>
+            </menu>
+        </submenu>
         <files folder="admin">
             <filename>access.xml</filename>
             <filename>config.xml</filename>
             <folder>forms</folder>
-            <folder>helpers</folder>
             <folder>language</folder>
-            <folder>layouts</folder>
             <folder>services</folder>
             <folder>sql</folder>
             <folder>src</folder>

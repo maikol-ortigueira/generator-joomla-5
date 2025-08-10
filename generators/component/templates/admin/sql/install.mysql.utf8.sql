@@ -20,6 +20,6 @@ CREATE TABLE IF NOT EXISTS `#__<%= lExtName %>_<%= lItemsName %>` (
   `modified` datetime NOT NULL,
   `modified_by` int unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `idx_state` (`state`),
+  KEY `idx_state` (`state`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 DEFAULT COLLATE=utf8mb4_unicode_ci;
 

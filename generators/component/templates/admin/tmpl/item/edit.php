@@ -36,24 +36,22 @@ $wa->useScript('keepalive')
     class="form-validate form-horizontal"
     >
 
-	<?php echo LayoutHelper::render('joomla.edit.title_alias', $this); 
+	<?php echo LayoutHelper::render('joomla.edit.title_alias', $this);
 	?>
 
 	<div class="main-card">
-		<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'basic', 'recall' => true, 'breakpoint' => 768]); ?>
+		<?php echo HTMLHelper::_('uitab.startTabSet', 'myTab', ['active' => 'details', 'recall' => true, 'breakpoint' => 768]); ?>
 
-		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'datos', Text::_('###########################')); ?>
+		<?php echo HTMLHelper::_('uitab.addTab', 'myTab', 'details', Text::_('COM_<%= uExtName %>_FIELDSET_DETAILS_LABEL')); ?>
 		<div class="row">
 			<div class="col-lg-9">
 				<fieldset class="options-form">
-					<legend><?php echo Text::_('###########################'); ?></legend>
+					<legend><?php echo Text::_('COM_<%= uExtName %>_FIELDSET_DETAILS_LABEL'); ?></legend>
+
 				</fieldset>
 			</div>
 			<div class="col-lg-3">
-				<fieldset id="fieldset-publish" class="options-form">
-					<legend><?php echo Text::_('###########################'); ?></legend>
-					<?php echo LayoutHelper::render('ortiga.edit.publishingdata', $this); ?>
-				</fieldset>
+        <?php echo LayoutHelper::render('joomla.edit.global', $this); ?>
 			</div>
 		</div>
 		<?php echo HTMLHelper::_('uitab.endTab'); ?>
