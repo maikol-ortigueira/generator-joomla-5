@@ -19,6 +19,10 @@ const licenses = [
 ];
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+  }
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(`Welcome to ${chalk.red("generator-joomla5")} generator!`));

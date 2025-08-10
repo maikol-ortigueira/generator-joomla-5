@@ -8,12 +8,12 @@
     {
       "name": "com_<%= lExtName %>.<%= lExtName %>",
       "type": "script",
-      "uri": "com_<%= lExtName %><%= lExtName %>.js"
+      "uri": "com_<%= lExtName %>/<%= lExtName %>.js"
     },
     {
       "name": "com_<%= lExtName %>.<%= lExtName %>",
       "type": "style",
-      "uri": "com_<%= lExtName %><%= lExtName %>.css"
+      "uri": "com_<%= lExtName %>/<%= lExtName %>.css"
     }
   ]
 }

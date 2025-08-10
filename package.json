@@ -31,7 +31,7 @@
     "pluralize": "^8.0.0",
     "prettier": "^1.19.1",
     "yeoman-assert": "^3.1.1",
-    "yeoman-test": "^1.7.0"
+    "yeoman-test": "^2.7.0"
   },
   "engines": {
     "npm": ">= 4.0.0"
@@ -39,7 +39,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "generator-license": "^5.7.0",
-    "yeoman-generator": "^3.1.1",
+    "yeoman-generator": "^5.10.0",
     "yosay": "^2.0.2"
   },
   "jest": {
@@ -85,5 +85,5 @@
     "test:cov": "jest --coverage"
   },
   "repository": "maikol-ortigueira/generator-joomla-5",
-  "license": "Apache-2.0"
+  "license": "MIT"
 }

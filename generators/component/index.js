@@ -244,10 +244,6 @@ module.exports = class extends Generator {
       {
         from: "site/tmpl/items/default.php",
         to: `site/tmpl/${this.props.itemsName.toLowerCase()}/default.php`
-      },
-      {
-        from: "site/tmpl/item/edit.php",
-        to: `site/tmpl/${this.props.itemName.toLowerCase()}/edit.php`
       }
     ];
 

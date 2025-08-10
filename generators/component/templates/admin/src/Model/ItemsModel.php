@@ -33,10 +33,14 @@ class <%= uItemsName %>Model extends ListModel
         if (empty($config['filter_fields'])) {
             $config['filter_fields'] = [
                 'id', 'a.id',
+                'alias', 'a.alias',
                 'name', 'a.name',
                 'state', 'a.state',
                 'checked_out', 'a.checked_out',
                 'checked_out_time', 'a.checked_out_time',
+                'created', 'a.created',
+                'created_by', 'a.created_by',
+                'created_by_alias', 'a.created_by_alias',
             ];
         }
 

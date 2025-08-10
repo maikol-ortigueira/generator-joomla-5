@@ -10,6 +10,16 @@
 
 namespace <%= vendorName %>\Component\<%= nsExtName %>\Site\Controller;
 
+use Joomla\CMS\MVC\Controller\BaseController;
+
 // phpcs: disable PSR1.Files.SideEffects
 \defined('_JEXEC') or die;
 // phpcs: enable PSR1.Files.SideEffects
+
+/**
+ * <%= nsItemsName %> Controller
+ *
+ * @since  1.5
+ */
+class <%= nsItemsName %>Controller extends BaseController
+{}

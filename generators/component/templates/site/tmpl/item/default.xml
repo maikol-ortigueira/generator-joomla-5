@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	<layout title="COM_<%= uExtName %>_<%= uItemName %>_VIEW_DEFAULT_TITLE" option="COM_<%= uExtName %>_<%= uItemName %>_VIEW_DEFAULT_OPTION">
+		<message>
+			<![CDATA[COM_<%= uExtName %>_<%= uItemName %>_VIEW_DEFAULT_DESC]]>
+		</message>
+	</layout>
+
+	<!-- Add fields to the request variables for the layout. -->
+	<fields name="request">
+		<fieldset name="request">
+			<field
+				name="id"
+				type="sql"
+				label="COM_<%= uExtName %>_SELECT_<%= uItemName %>_LABEL"
+                sql_select="id, name"
+                sql_from="#__<%= lExtName %>_<%= lItemsName %>"
+                sql_order="name"
+                key_field="id"
+                value_field="name"
+				required="true"
+			/>
+		</fieldset>
+	</fields>
+</metadata>
