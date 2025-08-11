@@ -110,8 +110,11 @@ class <%= nsItemsName %>Model extends ListModel
                 [
                     $db->quoteName('a.id'),
                     $db->quoteName('a.name'),
+                    $db->quoteName('a.alias'),
                     $db->quoteName('a.checked_out'),
                     $db->quoteName('a.checked_out_time'),
+                    $db->quoteName('a.publish_up'),
+                    $db->quoteName('a.publish_down'),
                     $db->quoteName('a.state'),
                 ]
             )

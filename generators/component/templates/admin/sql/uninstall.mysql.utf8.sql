@@ -1,1 +1,1 @@
-DROP TABLE IF NOT EXISTS `#__<%= lExtName %>_<%= lItemsName %>`;
+DROP TABLE IF EXISTS `#__<%= lExtName %>_<%= lItemsName %>`;
